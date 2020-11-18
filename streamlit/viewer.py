@@ -26,12 +26,18 @@ st.info('Dataset selected {}'.format(filename))
 df = pd.read_csv(filename)
 
 # Show sample head
-st.write(df.head(5)
+st.write(df.head(5))
 
 # Show Dataset
-st.subheader('Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur')
+st.subheader('Aperçu du dataset')
 if st.button('Show dataset sample'):
     st.write(df.head(10))
+
+# Select custom rows index
+st.subheader('Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur')
+selected_indices = st.multiselect('Select rows:', df.index)
+selected_rows = df.loc[selected_indices]
+st.write('### Lignes à afficher', selected_rows)
 
 # Show Columns
 st.subheader('Afficher le nom des colonnes du dataset')
@@ -39,6 +45,10 @@ if st.button("Show dataset columns"):
     st.write(df.columns)
 
 st.subheader('Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées')
+# Show Datatypes
+if st.button("Data Info"):
+    st.write(df.info)
+
 # Show Datatypes
 if st.button("Data Types"):
     st.write(df.dtypes)
