@@ -54,11 +54,13 @@ if st.button('Data Info'):
 if st.button('Data Types'):
     st.write(df.dtypes)
 
+# Show columns
 selected_columns = st.multiselect('Sélectionner des colonnes :', df.columns)
 if selected_columns:
     # selected_cols = df.loc[selected_columns]
-    selected_cols = df.loc[selected_cols].dtypes()
-    st.write('### Colonnes à afficher', selected_cols)
+    # selected_cols = df.loc[selected_cols].dtypes()
+    st.write('You selected',len(selected_columns),'column(s)')
+    # st.write('### Colonnes à afficher', selected_cols)
 
 # Show summary
 st.subheader('5. Afficher les statistiques descriptives du dataset')
