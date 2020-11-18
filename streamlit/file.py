@@ -5,9 +5,8 @@ import os
 
 st.title('Exploring Data with Streamlit')
 
+# method load specific dataset
 DATA_URL = 'data/Pokemon.csv'
-
-# set cache request
 @st.cache
 def load_data(nrows):
     data = pd.read_csv(DATA_URL, nrows=nrows)
@@ -16,32 +15,51 @@ def load_data(nrows):
     # data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
     return data
 
-# function for file_selector
+# method for dataset files selector
 def file_selector(folder_path='./data'):
+    # list files name on folder_path
     filenames = os.listdir(folder_path)
-    selected_filename = st.selectbox("Select a dataset",filenames)
+    # select specific dataset from list
+    selected_filename = st.selectbox('Select a dataset',filenames)
+    # return the path / file
     return os.path.join(folder_path,selected_filename)
 
 filename = file_selector()
-st.info("Dataset selected {}".format(filename))
+# display filename selected
+st.info('Dataset selected {}'.format(filename))
 
 # Read Data
 df = pd.read_csv(filename)
 
+# Show Dataset
+if st.button("Show dataset sample"):
+    st.write(df.head(10))
+
+# Show Columns
+if st.button("Show columns name"):
+    st.write(df.columns)
+
+if st.checkbox("Show sample of the current Dataset"):
+    number = st.number_input("Number of Rows to View")
+    st.dataframe(df.head(number))
+
+# Show Dataset
+if st.checkbox('Show Dataset'):
+    number = st.number_input('Number of Rows to View')
+    st.dataframe(df.head(number))
+
 # loading the dataset
 data_load_state = st.text('Loading data...')
 data = load_data(10000)
+
 # success
-data_load_state.text("Done! (using st.cache)")
+data_load_state.text('Done! (using st.cache)')
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
     st.write(data)
 
-
 st.subheader('Data\'s columns')
 st.write(data.columns.tolist())
 
-# hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
-# st.bar_chart(hist_values)
 # st.write(data.columns.tolist())
