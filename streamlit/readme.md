@@ -1,3 +1,7 @@
+# Command to execute the current project
+`streamlit run viewer.py`
+> then open localhost browser URL : like http://localhost:8502 by default
+
 ## TP : réalisation d'une data app 
 
 votre mission est de construire une petite application de visualisation interactive de données avec l’outil Streamlit vu au chapitre précédent, qui contiendra les fonctionnalités suivantes :   

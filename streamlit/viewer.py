@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+import seaborn as sns
 import os
 
 st.title('Exploring Data with Streamlit')
-
-
 
 # method for dataset files selector
 def file_selector(folder_path='./data'):
@@ -16,16 +17,20 @@ def file_selector(folder_path='./data'):
     # return the path / file
     return os.path.join(folder_path,selected_filename)
 
+# define filename as current file selected
 filename = file_selector()
 # display filename selected
 st.info('Dataset selected {}'.format(filename))
 
-# Read Data
+# Read Dataset
 df = pd.read_csv(filename)
+
+# Show sample head
+st.write(df.head(5)
 
 # Show Dataset
 st.subheader('Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur')
-if st.button("Show dataset sample"):
+if st.button('Show dataset sample'):
     st.write(df.head(10))
 
 # Show Columns
@@ -34,6 +39,20 @@ if st.button("Show dataset columns"):
     st.write(df.columns)
 
 st.subheader('Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées')
+# Show Datatypes
+if st.button("Data Types"):
+    st.write(df.dtypes)
+
+st.subheader('Afficher les statistiques descriptives du dataset')
+# Show Summary
+if st.checkbox("Summary"):
+    st.write(df.describe().T)
+
+st.subheader("Data Visualization")
+st.subheader('Afficher plusieurs type de graphique dans une partie visualisation avec notamment :')
+
+st.subheader('Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)')
+st.subheader('Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
 
 # Show Shape
 st.subheader('La shape du dataset, par lignes et par colonnes')
