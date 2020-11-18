@@ -5,15 +5,7 @@ import os
 
 st.title('Exploring Data with Streamlit')
 
-# method load specific dataset
-DATA_URL = 'data/Pokemon.csv'
-@st.cache
-def load_data(nrows):
-    data = pd.read_csv(DATA_URL, nrows=nrows)
-    lowercase = lambda x: str(x).lower()
-    data.rename(lowercase, axis='columns', inplace=True)
-    # data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-    return data
+
 
 # method for dataset files selector
 def file_selector(folder_path='./data'):
@@ -32,12 +24,21 @@ st.info('Dataset selected {}'.format(filename))
 df = pd.read_csv(filename)
 
 # Show Dataset
+st.subheader('Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur')
 if st.button("Show dataset sample"):
     st.write(df.head(10))
 
 # Show Columns
-if st.button("Show columns name"):
+st.subheader('Afficher le nom des colonnes du dataset')
+if st.button("Show dataset columns"):
     st.write(df.columns)
+
+st.subheader('Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées')
+
+# Show Shape
+st.subheader('La shape du dataset, par lignes et par colonnes')
+if st.button("Show shape"):
+    st.write(df.describe())
 
 if st.checkbox("Show sample of the current Dataset"):
     number = st.number_input("Number of Rows to View")
@@ -48,18 +49,7 @@ if st.checkbox('Show Dataset'):
     number = st.number_input('Number of Rows to View')
     st.dataframe(df.head(number))
 
-# loading the dataset
-data_load_state = st.text('Loading data...')
-data = load_data(10000)
-
-# success
-data_load_state.text('Done! (using st.cache)')
-
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
-    st.write(data)
+    st.write(df)
 
-st.subheader('Data\'s columns')
-st.write(data.columns.tolist())
-
-# st.write(data.columns.tolist())
