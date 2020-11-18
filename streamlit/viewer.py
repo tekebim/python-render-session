@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import seaborn as sns
 import os
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.title('Exploring Data with Streamlit')
 
@@ -78,6 +79,14 @@ st.title("Data Visualization")
 st.subheader('7. Afficher plusieurs type de graphique dans une partie visualisation avec notamment :')
 
 st.subheader('7.1. Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)')
+
+# Seaborn Heatmap
+if st.checkbox('Show heatmap'):
+    dfHeatmap = sns.heatmap(df.corr(), annot=True)
+    dfHeatmap.set_title('Heatmap')
+    st.write(dfHeatmap)
+    st.pyplot()
+
 
 st.subheader('  7.2. Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
 
