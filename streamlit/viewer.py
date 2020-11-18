@@ -99,10 +99,14 @@ if st.button('Show heatmap'):
     st.write(dfHeatmap)
     st.pyplot()
 
-# Graph plot
+# Hist plot
 st.subheader('7.2. Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
-if st.button('Show '):
-    st.write('graph plot')
+dfAllColumnsName = df.columns.tolist()
+selectedColumns = st.multiselect('Colonne à afficher', dfAllColumnsName)
+if st.button('Show graph'):
+    dfHist= df[selectedColumns].plot(kind='hist')
+    st.write(dfHist)
+    st.pyplot()
 
-if st.button('Merci :)'):
+if st.button('Happy with these dataset ?'):
     st.balloons()
