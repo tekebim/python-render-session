@@ -107,11 +107,20 @@ if st.checkbox('Show heatmap'):
 # Hist plot
 st.subheader('7.2. Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
 dfAllColumnsName = df.columns.tolist()
-selectedColumns = st.multiselect('Colonne à afficher', dfAllColumnsName)
-if st.button('Show graph'):
-    dfHist= df[selectedColumns].plot(kind='hist')
+
+if st.checkbox('Show global histogram'):
+    dfHist= df.hist(bins=3)
     st.write(dfHist)
     st.pyplot()
+
+if st.checkbox('Show specific histogram'):
+    selectedColumns = st.multiselect('Colonne à afficher', dfAllColumnsName)
+    if selectedColumns :
+        dfHist = df[selectedColumns].hist()
+        st.write(dfHist)
+        st.pyplot()
+
+st.text('-----------------------------------')
 
 if st.button('Happy with these dataset ?'):
     st.balloons()
