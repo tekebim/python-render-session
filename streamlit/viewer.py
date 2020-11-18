@@ -26,6 +26,11 @@ st.info('Dataset selected {}'.format(filename))
 # Read Dataset
 df = pd.read_csv(filename)
 
+# Show raw data
+if st.checkbox('Show raw data'):
+    st.subheader('Raw data')
+    st.write(df)
+
 # Show sample head
 st.write(df.head(5))
 
@@ -63,30 +68,41 @@ if selected_columns:
 st.subheader('5. Afficher les statistiques descriptives du dataset')
 if st.button('Show summary'):
     st.write(df.describe().T)
+if st.button('Show describe'):
+    st.write(df.describe())
 
 # Show Shape
 st.subheader('6. La shape du dataset, par lignes et par colonnes')
-if st.button('Show shape'):
-    st.write(df.describe())
+shape_type = st.radio('Shapes dataset :',('Lignes','Colonnes','Tous'))
+if shape_type == 'Lignes':
+    st.text('Nombre de lignes')
+    st.write(df.shape[0])
+elif shape_type == 'Colonnes':
+    st.text('Nombre de colonnes')
+    st.write(df.shape[1])
+elif shape_type == 'Tous':
+    st.text('Tous')
+    st.write(df.shape)
+else:
+    st.write(df.shape())
 
-# Show raw data
-if st.checkbox('Show raw data'):
-    st.subheader('Raw data')
-    st.write(df)
-
-st.title("Data Visualization")
+st.title('Data Visualization')
 
 st.subheader('7. Afficher plusieurs type de graphique dans une partie visualisation avec notamment :')
 
 st.subheader('7.1. Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)')
 
 # Seaborn Heatmap
-if st.checkbox('Show heatmap'):
+if st.button('Show heatmap'):
     dfHeatmap = sns.heatmap(df.corr(), annot=True)
     dfHeatmap.set_title('Heatmap')
     st.write(dfHeatmap)
     st.pyplot()
 
+# Graph plot
+st.subheader('7.2. Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
+if st.button('Show '):
+    st.write('graph plot')
 
-st.subheader('  7.2. Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
-
+if st.button('Merci :)'):
+    st.balloons()
