@@ -45,9 +45,8 @@ st.subheader('3. Afficher le nom des colonnes du dataset')
 if st.button("Show dataset columns"):
     st.write(df.columns)
 
-st.subheader('4. Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées')
-
 # Show Datatypes
+st.subheader('4. Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées')
 if st.button('Data Info'):
     st.write(df.info)
 
@@ -55,32 +54,27 @@ if st.button('Data Info'):
 if st.button('Data Types'):
     st.write(df.dtypes)
 
+selected_columns = st.multiselect('Sélectionner des colonnes :', df.columns)
+if selected_columns:
+    # selected_cols = df.loc[selected_columns]
+    selected_cols = df.loc[selected_cols].dtypes()
+    st.write('### Colonnes à afficher', selected_cols)
+
+# Show summary
 st.subheader('5. Afficher les statistiques descriptives du dataset')
-
-# Show Summary
-if st.checkbox('Statistiques : summary'):
+if st.button('Show summary'):
     st.write(df.describe().T)
-
-
 
 # Show Shape
 st.subheader('6. La shape du dataset, par lignes et par colonnes')
-if st.button("Show shape"):
-    st.write(df.shape())
+if st.button('Show shape'):
     st.write(df.describe())
 
-if st.checkbox("Show sample of the current Dataset"):
-    number = st.number_input("Number of Rows to View")
-    st.dataframe(df.head(number))
-
-# Show Dataset
-if st.checkbox('Show Dataset'):
-    number = st.number_input('Number of Rows to View')
-    st.dataframe(df.head(number))
-
+# Show raw data
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
     st.write(df)
+
 st.title("Data Visualization")
 
 st.subheader('7. Afficher plusieurs type de graphique dans une partie visualisation avec notamment :')
