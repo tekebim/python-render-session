@@ -41,10 +41,14 @@ if st.button('Show dataset sample'):
 
 # Select custom rows index
 st.subheader('2. Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur')
-selected_indices = st.multiselect('Sélectionner des lignes :', df.index)
-if  selected_indices:
-    selected_rows = df.loc[selected_indices]
-    st.write('### Lignes à afficher', selected_rows)
+if st.checkbox("Show DataSet"):
+    number = st.number_input("Number of Rows to View", value=1)
+    st.dataframe(df.head(int(number)))
+
+    selectedIndices = st.multiselect('Sélectionner des lignes (par index):', df.index)
+    if  selectedIndices:
+        selectedRows = df.loc[selectedIndices]
+        st.write('### Lignes à afficher', selectedRows)
 
 # Show Columns
 st.subheader('3. Afficher le nom des colonnes du dataset')
@@ -73,18 +77,19 @@ if st.button('Show describe'):
 
 # Show Shape
 st.subheader('6. La shape du dataset, par lignes et par colonnes')
-shape_type = st.radio('Shapes dataset :',('Lignes','Colonnes','Tous'))
-if shape_type == 'Lignes':
-    st.text('Nombre de lignes')
-    st.write(df.shape[0])
-elif shape_type == 'Colonnes':
-    st.text('Nombre de colonnes')
-    st.write(df.shape[1])
-elif shape_type == 'Tous':
-    st.text('Tous')
-    st.write(df.shape)
-else:
-    st.write(df.shape())
+if st.checkbox('Show shapes'):
+    shape_type = st.radio('Shapes dataset :',('Lignes','Colonnes','Tous'))
+    if shape_type == 'Lignes':
+        st.text('Nombre de lignes')
+        st.write(df.shape[0])
+    elif shape_type == 'Colonnes':
+        st.text('Nombre de colonnes')
+        st.write(df.shape[1])
+    elif shape_type == 'Tous':
+        st.text('Tous')
+        st.write(df.shape)
+    else:
+        st.write(df.shape())
 
 st.title('Data Visualization')
 
@@ -93,7 +98,7 @@ st.subheader('7. Afficher plusieurs type de graphique dans une partie visualisat
 st.subheader('7.1. Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)')
 
 # Seaborn Heatmap
-if st.button('Show heatmap'):
+if st.checkbox('Show heatmap'):
     dfHeatmap = sns.heatmap(df.corr(), annot=True)
     dfHeatmap.set_title('Heatmap')
     st.write(dfHeatmap)
