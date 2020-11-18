@@ -45,16 +45,12 @@ st.subheader('3. Afficher le nom des colonnes du dataset')
 if st.button("Show dataset columns"):
     st.write(df.columns)
 
-# Show Datatypes
+# Show Datatypes columns
 st.subheader('4. Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées')
-if st.button('Data Info'):
-    st.write(df.info)
-
-# Show Datatypes
 if st.button('Data Types'):
     st.write(df.dtypes)
 
-# Show columns
+# selected columns
 selected_columns = st.multiselect('Sélectionner des colonnes :', df.columns)
 if selected_columns:
     # selected_cols = df.loc[selected_columns]
@@ -83,5 +79,5 @@ st.subheader('7. Afficher plusieurs type de graphique dans une partie visualisat
 
 st.subheader('7.1. Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)')
 
-st.subheader('7.2. Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
+st.subheader('  7.2. Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)')
 
