@@ -1,31 +1,66 @@
 <!doctype html>
-<title>App book Flask</title>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>App Flaks - Detail du livre</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
 {% if data %}
+<main>
+    <div class="container my-5 ">
 
-<div class="book">
-    <h1 class="book__title">{{ data.title }}</h1>
-    <picture>
-        <img src={{data.thumbnailUrl}} alt="">
-    </picture>
-    <div class="book__infos">
-        <p class="book__isbn">{{ data.isbn }}</p>
-        <p class="book__pagecount">{{ data.pageCount }}</p>
-        <p class="book__published">{{ data.publishedDate }}</p>
+        <div class="breadcrumb">
+            <div class="text-left">
+                <a class="btn btn-primary my-3 mx-auto" href="/books/json"
+                   role="button">Retour</a>
+            </div>
+        </div>
+        <div class="card book shadow-lg mb-5 bg-white rounded">
+            <div class="row">
+                <div class="book__thumb col-md-5">
+                    <img src={{data.thumbnailUrl}} class="card-img-top" alt={{ data.title }}>
+                </div>
+                <div class="book__details col-md-7 p-5">
+                    <h1 class="book__title card-title">{{ data.title }}</h1>
+                    <div class="border-top my-3"></div>
+                    <div class="book__infos card-body p-0">
+                        <p class="book__isbn m-0 p-0"><span class="font-weight-bold">N° ISBN :</span> {{ data.isbn }}
+                        </p>
+                        <p class="book__pagecount m-0 p-0"><span class="font-weight-bold">Nombre de pages : </span>{{
+                            data.pageCount }}</p>
+                        <p class="book__published m-0 p-0"><span class="font-weight-bold">Date de publication :</span>{{
+                            data.publishedDate }}</p>
+                    </div>
+                    <div class="border-top my-3"></div>
+                    <div class="book__detail card-text">
+                        <p class="book__desc">
+                            <span class="font-weight-bold d-block">Résumé : </span>
+                            {{ data.longDescription}}</p>
+                        <div class="border-top my-3"></div>
+                        <p class="book__desc m-0 p-0">
+                            <span class="font-weight-bold">Auteur(s) :</span>
+                        </p>
+                        <ul class="book__authors list-inline list-unstyled">
+                            {% for author in data.authors %}
+                            <li class="list-inline-item">{{ author }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p class="book__desc m-0 p-0">
+                            <span class="font-weight-bold">Catégorie(s) :</span>
+                        </p>
+                        <ul class="book__categorie list-inline list-unstyled">
+                            {% for category in data.categories %}
+                            <li>{{ category }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="book__detail">
-        <p class="book__desc">{{ data.shortDescription}}</p>
-        <ul class="book__authors">
-            {% for author in data.authors %}
-            <li>{{ author }}</li>
-            {% endfor %}
-        </ul>
-        <ul class="book__categorie">
-            {% for category in data.categories %}
-            <li>{{ category }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-{% else %}
-<h1>World!</h1>
+</main>
 {% endif %}
+
+</body>
+</html>

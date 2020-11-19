@@ -14,6 +14,7 @@ booklist = [
 ]
 
 filename = './data/books.json'
+msg_error = 'No books found'
 
 # default route index
 @app.route('/')
@@ -41,30 +42,43 @@ def get_book_title(book_title):
         if book['titre'] == str(book_title):
             return book
 
-# endpoint json books
-@app.route('/api/books/json', methods=['GET'])
+# route json books
+@app.route('/books/json', methods=['GET'])
 def get_json_books():
     with open(filename) as books_json:
         data = json.load(books_json)
     return render_template('books.html', data=data)
 
-# endpoint json books by title
-@app.route('/api/books/json/<string:book_title>', methods=['GET'])
+# route json books by title
+@app.route('/books/json/<string:book_title>', methods=['GET'])
 def get_json_book_by_title(book_title):
     with open(filename) as books_json:
         data = json.load(books_json)
+        result = None
         for book in data :
             if book['title'] == str(book_title):
-                return render_template('book-single.html', data=book)
+                result = book
+        if result:
+            return render_template('book-single.html', data=result)
+        else :
+            return msg_error
 
-# endpoint json books by id
-@app.route('/api/books/json/<int:book_id>', methods=['GET'])
+# route json books by id
+@app.route('/books/json/<int:book_id>', methods=['GET'])
 def get_json_book_by_id(book_id):
     with open(filename) as books_json:
-        data = json.load(books_json)
-        for book in data:
-            if book['id'] == int(book_id):
-                return render_template('book-single.html', data=book)
+            data = json.load(books_json)
+            result = None
+            result = []
+
+            for book in data :
+                if book['pageCount'] == int(book_id):
+                    result = book
+
+            if result:
+                return render_template('book-single.html', data=result)
+            else :
+                return msg_error
 
 if __name__ == '__main__':
     app.run(debug=True)
