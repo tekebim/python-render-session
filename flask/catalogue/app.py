@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify
+import os
+from flask import Flask, render_template, request, jsonify, json
 app = Flask(__name__)
 
 booklist = [
@@ -37,6 +38,19 @@ def get_book_title(book_title):
     for book in booklist :
         if book['titre'] == str(book_title):
             return book
+
+
+@app.route('/books/json', methods=['GET'])
+def load_books():
+    # static/data/test_data.json
+    # filename = os.path.join(app.static_folder, 'data', 'books.json')
+    filename = './data/books.json'
+
+    with open(filename) as test_file:
+        data = json.load(test_file)
+
+    return render_template('books.html', data=data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

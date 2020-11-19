@@ -1,0 +1,12 @@
+<!doctype html>
+<title>App book Flask</title>
+{% if data %}
+    {% for book in data %}
+    <div class="book">
+        <p>{{ book['title'] }}</p>
+        <p>{{ book['isbn'] }}</p>
+    </div>
+    {% endfor %}
+{% else %}
+<h1>World!</h1>
+{% endif %}
