@@ -23,30 +23,16 @@ def get_books():
     )
 
 @app.route('/api/books/<int:book_id>', methods=['GET'])
-def get_book(book_id):
-     results = []
-     #for book in booklist:
-     #    if book['id'] == book_id:
-     #        results.append(book)
-     #        return jsonify(results)
-     #    else :
-     #        return 'no book found'
+def get_book_id(book_id):
+    for book in booklist :
+        if book['id'] == int(book_id):
+            return book
 
-# route test
-@app.route('/api/toto/<int:book_id>', methods=['GET'])
-def get_toto(book_id):
-    return str(book_id)
-
-    # results = []
-    # for book in booklist:
-    #     if book['id'] == book_id:
-    #         results.append(book)
-    #         return jsonify(results)
-    #     else :
-    #         return 'no book found'
-
-    # book = request.args.get('id')
-    # book = request.args.get('id', type = int)
+@app.route('/api/books/<string:book_title>', methods=['GET'])
+def get_book_title(book_title):
+    for book in booklist :
+        if book['title'] == book_title:
+            return book
 
 if __name__ == '__main__':
     app.run(debug=True)
