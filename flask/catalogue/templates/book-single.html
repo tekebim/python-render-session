@@ -1,0 +1,31 @@
+<!doctype html>
+<title>App book Flask</title>
+{% if data %}
+
+<div class="book">
+    <h1 class="book__title">{{ data.title }}</h1>
+    <picture>
+        <img src={{data.thumbnailUrl}} alt="">
+    </picture>
+    <div class="book__infos">
+        <p class="book__isbn">{{ data.isbn }}</p>
+        <p class="book__pagecount">{{ data.pageCount }}</p>
+        <p class="book__published">{{ data.publishedDate }}</p>
+    </div>
+    <div class="book__detail">
+        <p class="book__desc">{{ data.shortDescription}}</p>
+        <ul class="book__authors">
+            {% for author in data.authors %}
+            <li>{{ author }}</li>
+            {% endfor %}
+        </ul>
+        <ul class="book__categorie">
+            {% for category in data.categories %}
+            <li>{{ category }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% else %}
+<h1>World!</h1>
+{% endif %}

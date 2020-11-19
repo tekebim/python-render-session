@@ -13,6 +13,8 @@ booklist = [
 	}
 ]
 
+filename = './data/books.json'
+
 # default route index
 @app.route('/')
 def index():
@@ -39,18 +41,30 @@ def get_book_title(book_title):
         if book['titre'] == str(book_title):
             return book
 
-
-@app.route('/books/json', methods=['GET'])
-def load_books():
-    # static/data/test_data.json
-    # filename = os.path.join(app.static_folder, 'data', 'books.json')
-    filename = './data/books.json'
-
-    with open(filename) as test_file:
-        data = json.load(test_file)
-
+# endpoint json books
+@app.route('/api/books/json', methods=['GET'])
+def get_json_books():
+    with open(filename) as books_json:
+        data = json.load(books_json)
     return render_template('books.html', data=data)
 
+# endpoint json books by title
+@app.route('/api/books/json/<string:book_title>', methods=['GET'])
+def get_json_book_by_title(book_title):
+    with open(filename) as books_json:
+        data = json.load(books_json)
+        for book in data :
+            if book['title'] == str(book_title):
+                return render_template('book-single.html', data=book)
+
+# endpoint json books by id
+@app.route('/api/books/json/<int:book_id>', methods=['GET'])
+def get_json_book_by_id(book_id):
+    with open(filename) as books_json:
+        data = json.load(books_json)
+        for book in data:
+            if book['id'] == int(book_id):
+                return render_template('book-single.html', data=book)
 
 if __name__ == '__main__':
     app.run(debug=True)
