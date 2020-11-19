@@ -1,3 +1,32 @@
+# Les différentes routes du projet 
+
+## Endpoints API Route
+En méthode GET uniquement
+
+**A tester dans le navigateur ou sous POSTMAN**
+
+> Endpoint par id (int)
+`http://127.0.0.1:5000/api/books/<id>`
+> exemple : http://127.0.0.1:5000/api/books/1
+
+> Endpoint par title (string)
+>`http://127.0.0.1:5000/api/books/<title>`
+> exemple : http://127.0.0.1:5000/api/books/un%20titre
+
+## Accès routes (parse fichier.json)
+
+> Route books 'all'
+`http://127.0.0.1:5000/books/json`
+> exemple : http://127.0.0.1:5000/books/json
+
+> Route book spécifique par (int)
+`http://127.0.0.1:5000/books/json/<id>`
+> exemple : http://127.0.0.1:5000/books/json/416
+
+> Route book spécifique par titre (string)
+`http://127.0.0.1:5000/books/json/<title>`
+> exemple : http://127.0.0.1:5000/books/json/Coffeehouse
+
 ## TP Flask 
 
 **Quickstart** 
