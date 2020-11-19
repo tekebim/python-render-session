@@ -1,12 +1,32 @@
 <!doctype html>
 <title>App book Flask</title>
 {% if data %}
-    {% for book in data %}
-    <div class="book">
-        <p>{{ book['title'] }}</p>
-        <p>{{ book['isbn'] }}</p>
+{% for book in data %}
+<div class="book">
+    <h1 class="book__title">{{ book['title'] }}</h1>
+    <picture>
+        <img src={{book['thumbnailUrl']}} alt="">
+    </picture>
+    <div class="book__infos">
+        <p class="book__isbn">{{ book['isbn'] }}</p>
+        <p class="book__pagecount">{{ book['pageCount'] }}</p>
+        <p class="book__published">{{ book['publishedDate'] }}</p>
     </div>
-    {% endfor %}
+    <div class="book__detail">
+        <p class="book__desc">{{ book['shortDescription']}}</p>
+        <ul class="book__authors">
+            {% for author in book['authors'] %}
+            <li>{{ author }}</li>
+            {% endfor %}
+        </ul>
+        <ul class="book__categorie">
+            {% for category in book['categories'] %}
+            <li>{{ category }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endfor %}
 {% else %}
 <h1>World!</h1>
 {% endif %}
