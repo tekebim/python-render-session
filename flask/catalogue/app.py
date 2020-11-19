@@ -22,14 +22,11 @@ def get_books():
             books = booklist
         )
 
-@app.route('/api/books/id', methods=['GET'])
-def get_book():
-    book = request.args.get('id')
+@app.route('/api/books/<int:book_id>', methods=['GET'])
+def get_book(book_id):
+    return str(book_id)
+    # book = request.args.get('id')
     # book = request.args.get('id', type = int)
-    if book :
-        return book
-    else :
-        return 'api endpoint'
 
 if __name__ == '__main__':
     app.run(debug=True)
