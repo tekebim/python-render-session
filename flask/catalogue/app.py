@@ -19,12 +19,32 @@ def index():
 @app.route('/api/books', methods=['GET'])
 def get_books():
     return jsonify(
-            books = booklist
-        )
+        books = booklist
+    )
 
 @app.route('/api/books/<int:book_id>', methods=['GET'])
 def get_book(book_id):
+     results = []
+     #for book in booklist:
+     #    if book['id'] == book_id:
+     #        results.append(book)
+     #        return jsonify(results)
+     #    else :
+     #        return 'no book found'
+
+# route test
+@app.route('/api/toto/<int:book_id>', methods=['GET'])
+def get_toto(book_id):
     return str(book_id)
+
+    # results = []
+    # for book in booklist:
+    #     if book['id'] == book_id:
+    #         results.append(book)
+    #         return jsonify(results)
+    #     else :
+    #         return 'no book found'
+
     # book = request.args.get('id')
     # book = request.args.get('id', type = int)
 
