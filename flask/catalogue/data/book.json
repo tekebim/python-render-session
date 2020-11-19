@@ -1,0 +1,10 @@
+book = [
+  {
+    'id': 1,
+    'titre': 'un titre'
+  },
+  {
+    'id': 2,
+    'titre': 'un autre titre random'
+  }
+]
