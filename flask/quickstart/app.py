@@ -9,6 +9,14 @@ def index():
 def about():
     return 'The about page'
 
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def say_hello(name=None):
+    if name:
+        return name
+    else:
+        return 'Hello World'
+
 @app.route('/ma_route/')
 @app.route('/ma_route/<name>')
 def hello(name=None):
